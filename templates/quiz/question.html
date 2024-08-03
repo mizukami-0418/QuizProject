@@ -1,22 +1,45 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>クイズ問題</title>
-</head>
-<body>
-    <h1>第 {{ request.session.current_question|add:1 }} 問</h1>
-    <p>{{ question.text }}</p>
-    <form method="post" action="{% url 'check_answer' question.id %}">
-        {% csrf_token %}
-        <input type="radio" name="option" value="{{ question.option1 }}" id="option1">
-        <label for="option1">{{ question.option1 }}</label><br>
-        <input type="radio" name="option" value="{{ question.option2 }}" id="option2">
-        <label for="option2">{{ question.option2 }}</label><br>
-        <input type="radio" name="option" value="{{ question.option3 }}" id="option3">
-        <label for="option3">{{ question.option3 }}</label><br>
-        <input type="radio" name="option" value="{{ question.option4 }}" id="option4">
-        <label for="option4">{{ question.option4 }}</label><br>
-        <button type="submit">解答</button>
-    </form>
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}クイズ問題{% endblock title %}
+{% block content %}
+<h1>第 {{ request.session.current_question|add:1 }} 問</h1>
+<p>{{ question.text }}</p>
+<form method="post" action="{% url 'check_answer' question.id %}">
+    {% csrf_token %}
+    {% comment %} <input type="radio" name="option" value="{{ question.option1 }}" id="option1">
+    <label for="option1">{{ question.option1 }}</label><br>
+    <input type="radio" name="option" value="{{ question.option2 }}" id="option2">
+    <label for="option2">{{ question.option2 }}</label><br>
+    <input type="radio" name="option" value="{{ question.option3 }}" id="option3">
+    <label for="option3">{{ question.option3 }}</label><br>
+    <input type="radio" name="option" value="{{ question.option4 }}" id="option4">
+    <label for="option4">{{ question.option4 }}</label><br> {% endcomment %}
+    <div class="form-check">
+        <input class="form-check-input" type="radio" value="{{ question.option1 }}" name="option" id="option1">
+        <label class="form-check-label" for="option1">
+        {{ question.option1 }}
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" value="{{ question.option2 }}" name="option" id="option2">
+        <label class="form-check-label" for="option2">
+        {{ question.option2 }}
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" value="{{ question.option3 }}" name="option" id="option3">
+        <label class="form-check-label" for="option3">
+        {{ question.option3 }}
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" value="{{ question.option4 }}" name="option" id="option4">
+        <label class="form-check-label" for="option4">
+        {{ question.option4 }}
+        </label>
+    </div>
+    <button class="btn btn-primary" type="submit">解答</button>
+</form>
+<a class="btn btn-secondary" href="{% url 'home' %}">途中でやめる</a>
+
+{% endblock content %}
+

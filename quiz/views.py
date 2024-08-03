@@ -57,7 +57,7 @@ def check_answer(request, question_id):
     
     else:
         question_number = request.session['current_question']
-        return render(request, 'quiz/answer.html', {'is_correct': is_correct, 'question_number': question_number})
+        return render(request, 'quiz/answer.html', {'question': question,'is_correct': is_correct, 'question_number': question_number})
     # else: # 10問以上になったらresultへリダイレクト
     #     return redirect('result')
 
