@@ -1,0 +1,22 @@
+<!-- templates/base.html -->
+
+<!DOCTYPE html>
+<html>
+
+{% include "includes/head.html" %}
+
+<body class="d-flex flex-column vh-100">
+
+{% include "includes/navbar.html" %}
+
+{% include "includes/message.html" %}
+
+<main class="container mt-auto">
+    {% block content %}
+    {% endblock %}
+</main> 
+
+{% include "includes/footer.html" %}
+
+</body>
+</html>

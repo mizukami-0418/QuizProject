@@ -1,0 +1,7 @@
+<!-- templates/includes/message.html -->
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success text-center mt-1">{{ message }}</div>
+    {% endfor %}   
+{% endif %}
