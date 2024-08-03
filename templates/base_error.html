@@ -1,0 +1,18 @@
+<!-- templates/base_error.html -->
+
+<!DOCTYPE html>
+<html>
+
+{% include "includes/head.html" %}
+
+<body class="d-flex flex-column vh-100">
+
+<main class="container mt-auto">
+    {% block content %}
+    {% endblock %}
+</main> 
+
+{% include "includes/script.html" %}
+
+</body>
+</html>

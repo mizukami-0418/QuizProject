@@ -1,19 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    <h1>まんがクイズにようこそ</h1>
-    <h2>最初にまんがを選択してください</h2>
-    <ul>
-        {% for category in categories %}
-            <li>
-                <a href="{% url 'select_difficulty' category.id %}">{{ category.name }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}HOMW{% endblock title %}
+{% block content %}
+<h1>まんがクイズにようこそ</h1>
+<h2>最初にまんがを選択してください</h2>
+<ul>
+    {% for category in categories %}
+        <li>
+            <a href="{% url 'select_difficulty' category.id %}">{{ category.name }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock content %}
