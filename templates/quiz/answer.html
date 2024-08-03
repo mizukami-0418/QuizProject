@@ -10,7 +10,7 @@
     {% else %}
         <p>不正解です。</p>
     {% endif %}
-    <p>正しい答え: {{ question.correct_option }}</p>
+    <p>正しい答え: {{ question.correct_answer }}</p>
     <a href="{% url 'question' question_id=next_question_id %}">次の問題</a>
 </body>
 </html>

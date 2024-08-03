@@ -36,7 +36,7 @@ def check_answer(request, question_id):
     # 挑戦者の回答を取得
     selected_option = request.POST.get('option')
     # 回答が正解か確認
-    is_correct = selected_option == question.correct_option
+    is_correct = selected_option == question.correct_answer
     
     if is_correct:
         request.session['score'] += 1 # 正解だった場合はスコアを1増やす
