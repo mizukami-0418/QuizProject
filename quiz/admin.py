@@ -24,8 +24,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 # 問題モデルのカスタマイズ
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('text', 'category', 'difficulty')
-    list_filter = ('category', 'difficulty')
+    list_display = ('text', 'category', 'difficulty', 'input_type')
+    list_filter = ('category', 'difficulty', 'input_type')
     search_fields = ('text',)
 
 
