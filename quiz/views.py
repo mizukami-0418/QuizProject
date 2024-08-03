@@ -51,3 +51,8 @@ def check_answer(request, question_id):
         return render(request, 'quiz/answer.html', {'question': question, 'is_correct': is_correct, 'next_question_id': next_question_id})
     else: # 10問以上になったらresultへリダイレクト
         return redirect('result')
+
+# 結果の表示
+def result(request):
+    score = request.session.get('score', 0)
+    return render(request, 'quiz/result.html', {'score': score})
