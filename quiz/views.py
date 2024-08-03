@@ -24,15 +24,19 @@ def quiz(request, category_id, difficulty_id):
     request.session['current_question'] = 0
     # 現在のスコアをセッションに保存します。初期スコアは0に設定します。
     request.session['score'] = 0
-    # 最初の問題のページにリダイレクトします。
+    # questionsリストのindexが「0」のidを引数にして、questionにリダイレクト。
     return redirect('question', question_id=questions[0].id)
 
 
 def question(request, question_id):
-    # quizで取得した問題10問をquestionに格納
+    # quizで取得した問題10問からidが「0」の問題をquestionに格納
     question = get_object_or_404(Question, id=question_id)
+    # カテゴリーのタイトルを取得
+    category_name = question.category.name
+    # 難易度を取得
+    difficulty_level = question.difficulty.level
     # questionを保持してquestion.htmlを描画
-    return render(request, 'quiz/question.html', {'question': question})
+    return render(request, 'quiz/question.html', {'question': question, 'category_name': category_name, 'difficulty_level': difficulty_level})
 
 
 def check_answer(request, question_id):
