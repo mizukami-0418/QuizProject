@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>クイズ問題</title>
+</head>
+<body>
+    <h1>第 {{ request.session.current_question|add:1 }} 問</h1>
+    <p>{{ question.text }}</p>
+    <form method="post" action="{% url 'check_answer' question.id %}">
+        {% csrf_token %}
+        <input type="radio" name="option" value="{{ question.option1 }}" id="option1">
+        <label for="option1">{{ question.option1 }}</label><br>
+        <input type="radio" name="option" value="{{ question.option2 }}" id="option2">
+        <label for="option2">{{ question.option2 }}</label><br>
+        <input type="radio" name="option" value="{{ question.option3 }}" id="option3">
+        <label for="option3">{{ question.option3 }}</label><br>
+        <input type="radio" name="option" value="{{ question.option4 }}" id="option4">
+        <label for="option4">{{ question.option4 }}</label><br>
+        <button type="submit">解答</button>
+    </form>
+</body>
+</html>
