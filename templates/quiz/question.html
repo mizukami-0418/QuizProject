@@ -6,6 +6,10 @@
 <p>{{ question.text }}</p>
 <form method="post" action="{% url 'check_answer' question.id %}">
     {% csrf_token %}
+    {% if question.input_type == 'text' %}
+    <label for="answer">答え:</label>
+    <input type="text" name="answer" id="answer">
+    {% else %}
     <div class="form-check">
         <input class="form-check-input" type="radio" value="{{ question.option1 }}" name="option" id="option1">
         <label class="form-check-label" for="option1">
@@ -30,6 +34,7 @@
         {{ question.option4 }}
         </label>
     </div>
+    {% endif %}
     <button class="btn btn-primary" type="submit">解答</button>
 </form>
 <a class="btn btn-secondary mt-2" href="{% url 'home' %}">途中でやめる</a>
