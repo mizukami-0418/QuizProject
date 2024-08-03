@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category, Difficulty, Question
-
+import unicodedata
 # Create your views here.
 
 def home(request):
@@ -39,13 +39,24 @@ def question(request, question_id):
     return render(request, 'quiz/question.html', {'question': question, 'category_name': category_name, 'difficulty_level': difficulty_level})
 
 
+def normalize_answer(answer):
+    """入力された回答を正規化する関数。前後の空白を取り除き、全角を半角に変換する。"""
+    if answer is None:
+        return ""
+    # 前後の空白を取り除き、全角文字を半角文字に正規化
+    return unicodedata.normalize('NFKC', answer.strip())
+
+
 def check_answer(request, question_id):
-    # DBから問題を取得
-    question = get_object_or_404(Question, id=question_id)
-    # 挑戦者の回答を取得
-    selected_option = request.POST.get('option')
-    # 回答が正解か確認
-    is_correct = selected_option == question.correct_answer
+    question = get_object_or_404(Question, id=question_id) # DBから問題を取得
+    # 回答方法により、正誤の判定を分岐
+    if question.input_type == 'text': # テキスト入力の場合
+        selected_option = request.POST.get('answer') # テキスト入力の回答を取得
+        is_correct = normalize_answer(selected_option) == normalize_answer(question.correct_answer) # 正規化された回答を解答と照合
+    else:
+        selected_option = request.POST.get('option') # 選択肢の回答を取得
+        # 回答の正誤を判定
+        is_correct = selected_option == question.correct_answer
     
     if is_correct:
         request.session['score'] += 1 # 正解だった場合はスコアを1増やす
