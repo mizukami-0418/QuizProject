@@ -23,10 +23,10 @@ class Question(models.Model):
     # 問題文
     text = models.CharField(max_length=500)
     # 選択肢
-    option1 = models.CharField(max_length=100)
-    option2 = models.CharField(max_length=100)
-    option3 = models.CharField(max_length=100)
-    option4 = models.CharField(max_length=100)
+    option1 = models.CharField(max_length=100, blank=True, null=True)
+    option2 = models.CharField(max_length=100, blank=True, null=True)
+    option3 = models.CharField(max_length=100, blank=True, null=True)
+    option4 = models.CharField(max_length=100, blank=True, null=True)
     # 正解
     correct_answer = models.CharField(max_length=100)
     
