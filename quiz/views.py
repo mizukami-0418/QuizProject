@@ -28,3 +28,26 @@ def question(request, question_id):
     question = get_object_or_404(Question, id=question_id)
     # questionを保持してquestion.htmlを描画
     return render(request, 'quiz/question.html', {'question': question})
+
+
+def check_answer(request, question_id):
+    # DBから問題を取得
+    question = get_object_or_404(Question, id=question_id)
+    # 挑戦者の回答を取得
+    selected_option = request.POST.get('option')
+    # 回答が正解か確認
+    is_correct = selected_option == question.correct_option
+    
+    if is_correct:
+        request.session['score'] += 1 # 正解だった場合はスコアを1増やす
+    
+    request.session['current_question'] += 1 # 問題数を１増やし次に進む
+    
+    # 問題数が9者以下なら次の問題へ進む
+    if request.session['current_question'] < 10:
+        # 次の問題のIDを取得
+        next_question_id = request.session['questions'][request.session['current_question']]
+        # 次の問題を描画
+        return render(request, 'quiz/answer.html', {'question': question, 'is_correct': is_correct, 'next_question_id': next_question_id})
+    else: # 10問以上になったらresultへリダイレクト
+        return redirect('result')
