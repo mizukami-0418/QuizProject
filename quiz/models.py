@@ -28,10 +28,10 @@ class Question(models.Model):
     # 問題文
     text = models.CharField(max_length=500)
     # 選択肢
-    option1 = models.CharField(max_length=100, blank=True)
-    option2 = models.CharField(max_length=100, blank=True)
-    option3 = models.CharField(max_length=100, blank=True)
-    option4 = models.CharField(max_length=100, blank=True)
+    option1 = models.CharField(max_length=100, blank=True, default='')
+    option2 = models.CharField(max_length=100, blank=True, default='')
+    option3 = models.CharField(max_length=100, blank=True, default='')
+    option4 = models.CharField(max_length=100, blank=True, default='')
     # 正解
     correct_answer = models.CharField(max_length=100)
     # 回答方法。デフォルトは４択
