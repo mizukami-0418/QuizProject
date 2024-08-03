@@ -11,13 +11,7 @@
     <ul>
         {% for category in categories %}
             <li>
-                {{ category.name }}
-                <ul>
-                    {% for difficulty in difficulties %}
-                        {% comment %} <li>{{ difficulty.level }}</li> {% endcomment %}
-                        <li><a href="{% url 'quiz' category.id difficulty.id %}">{{ difficulty.level }}</a></li>
-                    {% endfor %}
-                </ul>
+                <a href="{% url 'select_difficulty' category.id %}">{{ category.name }}</a>
             </li>
         {% endfor %}
     </ul>

@@ -8,19 +8,19 @@ class CategoryAdmin(admin.ModelAdmin):
     # EASYの問題数
     def easy_questions(self, obj):
         return Question.objects.filter(category=obj, difficulty__level='EASY').count()
-    easy_questions.short_description = 'EASYの問題数'
+    easy_questions.short_description = '初級の問題数'
     # NORMALの問題数
     def normal_questions(self, obj):
         return Question.objects.filter(category=obj, difficulty__level='NORMAL').count()
-    normal_questions.short_description = 'NORMALの問題数'
+    normal_questions.short_description = '中級の問題数'
     # HARDの問題数
     def hard_questions(self, obj):
         return Question.objects.filter(category=obj, difficulty__level='HARD').count()
-    hard_questions.short_description = 'HARDの問題数'
+    hard_questions.short_description = '上級の問題数'
     # EXTRA HARDの問題数
     def extra_hard_questions(self, obj):
         return Question.objects.filter(category=obj, difficulty__level='EXTRA HARD').count()
-    extra_hard_questions.short_description = 'EXTRA HARDの問題数'
+    extra_hard_questions.short_description = 'エキスパートの問題数'
 
 # 問題モデルのカスタマイズ
 class QuestionAdmin(admin.ModelAdmin):

@@ -6,9 +6,14 @@ from .models import Category, Difficulty, Question
 def home(request):
     # ホーム画面でジャンル選択
     category = Category.objects.all()
-    difficulty = Difficulty.objects.all()
-    return render(request, 'home.html', {'categories': category, 'difficulties': difficulty})
+    return render(request, 'home.html', {'categories': category})
 
+def select_difficulty(request, category_id):
+    # 難易度を選択
+    difficulty = Difficulty.objects.all()
+    # 選んだカテゴリーをCategoryから取得
+    category = get_object_or_404(Category, id=category_id)
+    return render(request, 'quiz/select_difficulty.html', {'difficulties': difficulty, 'category': category})
 
 def quiz(request, category_id, difficulty_id):
     # 指定されたカテゴリと難易度に一致する問題をランダムに10問取得
@@ -43,7 +48,7 @@ def check_answer(request, question_id):
     
     request.session['current_question'] += 1 # 問題数を１増やし次に進む
     
-    # 問題数が9者以下なら次の問題へ進む
+    # 出題数が9問以下なら次の問題へ進む
     if request.session['current_question'] < 10:
         # 次の問題のIDを取得
         next_question_id = request.session['questions'][request.session['current_question']]

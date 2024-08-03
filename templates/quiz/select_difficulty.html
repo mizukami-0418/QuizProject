@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h2>「{{ category.name }}」クイズの難易度を選択してください</h2>
+    <ul>
+        {% for difficulty in difficulties %}
+            <li><a href="{% url 'quiz' category.id difficulty.id %}">{{ difficulty.level }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
