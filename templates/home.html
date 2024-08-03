@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}HOME{% endblock title %}
+{% block content %}
+<div class="text-center">
+    <h1>まんがクイズにようこそ</h1>
+    <h2>最初にまんがを選択してください</h2>
+    <ul>
+        {% for category in categories %}
+            <li>
+                <a href="{% url 'select_difficulty' category.id %}">{{ category.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}回答結果{% endblock title %}
+{% block content %}
+<h1>回答結果</h1>
+{% if is_correct %}
+    <p>正解です！</p>
+{% else %}
+    <p>不正解です。</p>
+{% endif %}
+<p>正しい答え: {{ question.correct_answer }}</p>
+{% if not question_number %}
+<a href="{% url 'question' question_id=next_question_id %}">次の問題</a>
+{% else %}
+<a href="{% url 'result' %}">結果を見る</a>
+{% endif %}
+{% endblock content %}
