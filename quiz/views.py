@@ -54,8 +54,12 @@ def check_answer(request, question_id):
         next_question_id = request.session['questions'][request.session['current_question']]
         # 次の問題を描画
         return render(request, 'quiz/answer.html', {'question': question, 'is_correct': is_correct, 'next_question_id': next_question_id})
-    else: # 10問以上になったらresultへリダイレクト
-        return redirect('result')
+    
+    else:
+        question_number = request.session['current_question']
+        return render(request, 'quiz/answer.html', {'is_correct': is_correct, 'question_number': question_number})
+    # else: # 10問以上になったらresultへリダイレクト
+    #     return redirect('result')
 
 # 結果の表示
 def result(request):
