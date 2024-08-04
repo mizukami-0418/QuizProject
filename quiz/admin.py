@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Category, Difficulty, Question
+from .forms import QuestionAdminForm
 # Register your models here.
 
 # カテゴリーモデルのカスタマイズ
@@ -24,10 +25,10 @@ class CategoryAdmin(admin.ModelAdmin):
 
 # 問題モデルのカスタマイズ
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('text', 'category', 'difficulty')
-    list_filter = ('category', 'difficulty')
+    list_display = ('text', 'category', 'difficulty', 'input_type')
+    list_filter = ('category', 'difficulty', 'input_type')
     search_fields = ('text',)
-
+    form = QuestionAdminForm
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Difficulty)

@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block title %}難易度選択{% endblock title %}
 {% block content %}
-<h2>「{{ category.name }}」クイズの難易度を選択してください</h2>
+<h2>「{{ category.name }}」クイズ</h2>
+<h3>難易度を選択してください。</h3>
 <ul>
     {% for difficulty in difficulties %}
         <li><a href="{% url 'quiz' category.id difficulty.id %}">{{ difficulty.level }}</a></li>
