@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category, Difficulty, Question
+from django.contrib import messages
 import unicodedata
 # Create your views here.
 
@@ -59,8 +60,11 @@ def check_answer(request, question_id):
         is_correct = selected_option == question.correct_answer
     
     if is_correct:
+        messages.success(request, '正解！！！！次もこの調子で行こう')
         request.session['score'] += 1 # 正解だった場合はスコアを1増やす
-    
+    else:
+        messages.warning(request, '残念。次こそ正解だ！')
+        
     request.session['current_question'] += 1 # 問題数を１増やし次に進む
     
     # 出題数が9問以下なら次の問題へ進む
