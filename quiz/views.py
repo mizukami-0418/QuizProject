@@ -71,8 +71,18 @@ def check_answer(request, question_id):
     if request.session['current_question'] < 10:
         # 次の問題のIDを取得
         next_question_id = request.session['questions'][request.session['current_question']]
+        score = request.session.get('score', 0)
+        current_question = request.session.get('current_question')
+        context = {
+            'question': question,
+            'is_correct': is_correct,
+            'next_question_id': next_question_id,
+            'score': score,
+            'current_question': current_question,
+        }
         # 次の問題を描画
-        return render(request, 'quiz/answer.html', {'question': question, 'is_correct': is_correct, 'next_question_id': next_question_id})
+        return render(request, 'quiz/answer.html', context)
+        # return render(request, 'quiz/answer.html', {'question': question, 'is_correct': is_correct, 'next_question_id': next_question_id})
     
     else:
         question_number = request.session['current_question']

@@ -1,11 +1,24 @@
 {% extends "base.html" %}
 {% block title %}難易度選択{% endblock title %}
 {% block content %}
-<h2>「{{ category.name }}」クイズ</h2>
-<h3>難易度を選択してください。</h3>
-<ul>
-    {% for difficulty in difficulties %}
-        <li><a href="{% url 'quiz' category.id difficulty.id %}">{{ difficulty.level }}</a></li>
-    {% endfor %}
-</ul>
+<a href="{% url 'home' %}" class="btn btn-secondary">前に戻る</a>
+<div class="d-flex justify-content-center my-3">
+    <div class="card" style="width: 30rem;">
+        <div class="card-body text-center">
+            <h2 class="card-title">「{{ category.name }}」クイズ</h2>
+            <h3 class="card-text">難易度を選択してください。</h3>
+            {% for difficulty in difficulties %}
+                {% if difficulty.level == '初級' %}
+                <a href="{% url 'quiz' category.id difficulty.id %}" class="btn btn-primary mt-2">{{ difficulty.level }}</a>
+                {% elif difficulty.level == '中級' %}
+                <a href="{% url 'quiz' category.id difficulty.id %}" class="btn btn-success mt-2">{{ difficulty.level }}</a>
+                {% elif difficulty.level == '上級' %}
+                <a href="{% url 'quiz' category.id difficulty.id %}" class="btn btn-warning mt-2">{{ difficulty.level }}</a>
+                {% else %}
+                <a href="{% url 'quiz' category.id difficulty.id %}" class="btn btn-danger mt-2">{{ difficulty.level }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock content %}
