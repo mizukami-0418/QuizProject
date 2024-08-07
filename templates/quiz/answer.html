@@ -1,16 +1,22 @@
 {% extends "base.html" %}
 {% block title %}回答結果{% endblock title %}
 {% block content %}
-<h1>回答結果</h1>
-{% if is_correct %}
-    <p>正解です！</p>
-{% else %}
-    <p>不正解です。</p>
-{% endif %}
-<p>正しい答え: {{ question.correct_answer }}</p>
-{% if not question_number %}
-<a href="{% url 'question' question_id=next_question_id %}">次の問題</a>
-{% else %}
-<a href="{% url 'result' %}">結果を見る</a>
+<div class="viewport d-flex align-items-center text-center">
+    <div class="card mx-auto my-3" style="width: 30rem;">
+        <h1>回答結果</h1>
+        {% if is_correct %}
+            <p>正解です！</p>
+        {% else %}
+            <p>不正解です。</p>
+        {% endif %}
+        {% include "includes/message.html" %}
+        <p>正しい答え: {{ question.correct_answer }}</p>
+        {% if not question_number %}
+        <p>現在の成績：{{ score }} / {{ current_question }}</p>
+        <a href="{% url 'question' question_id=next_question_id %}">次の問題</a>
+        {% else %}
+        <a href="{% url 'result' %}">結果を見る</a>
+    </div>
+</div>
 {% endif %}
 {% endblock content %}
