@@ -7,17 +7,19 @@
         <div class="card-body text-center">
             <h2 class="card-title">「{{ category.name }}」クイズ</h2>
             <h3 class="card-text">難易度を選択してください。</h3>
-            {% for difficulty in difficulties %}
-                {% if difficulty.level == '初級' %}
-                <a href="{% url 'quiz' category.id difficulty.id %}" class="btn btn-primary mt-2">{{ difficulty.level }}</a>
-                {% elif difficulty.level == '中級' %}
-                <a href="{% url 'quiz' category.id difficulty.id %}" class="btn btn-success mt-2">{{ difficulty.level }}</a>
-                {% elif difficulty.level == '上級' %}
-                <a href="{% url 'quiz' category.id difficulty.id %}" class="btn btn-warning mt-2">{{ difficulty.level }}</a>
-                {% else %}
-                <a href="{% url 'quiz' category.id difficulty.id %}" class="btn btn-danger mt-2">{{ difficulty.level }}</a>
-                {% endif %}
-            {% endfor %}
+            <div class="d-grid gap-2">
+                {% for difficulty in difficulties %}
+                    {% if difficulty.level == '初級' %}
+                        <a href="{% url 'quiz' category.id difficulty.id %}" class="btn btn-primary mt-2">{{ difficulty.level }}</a>
+                    {% elif difficulty.level == '中級' %}
+                        <a href="{% url 'quiz' category.id difficulty.id %}" class="btn btn-success mt-2">{{ difficulty.level }}</a>
+                    {% elif difficulty.level == '上級' %}
+                        <a href="{% url 'quiz' category.id difficulty.id %}" class="btn btn-warning mt-2">{{ difficulty.level }}</a>
+                    {% else %}
+                        <a href="{% url 'quiz' category.id difficulty.id %}" class="btn btn-danger mt-2">{{ difficulty.level }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
